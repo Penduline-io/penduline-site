@@ -284,7 +284,7 @@
 <script>
   // ===================== EDIT ME =====================
   // Paste your Google Apps Script web app address between the quotes.
-  const SHEET_URL = "PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE";
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbwiW8YzHARhQvtCyIpxDXVefpWPoZZ_MPvBZ3l1bf33HnPkmv-5KLfHJUjvl9fKYD4V/exec";
   // ===================================================
 
   const form = document.getElementById("interest-form");
@@ -295,14 +295,14 @@
     event.preventDefault();
     note.className = "form-note";
 
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
     if (!name || !/^\S+@\S+\.\S+$/.test(email)) {
       note.className = "form-note error";
       note.textContent = "Add your name and a valid email address to continue.";
       return;
     }
-    if (form.website.value) return; // a bot filled the hidden field
+    if (form.elements.website.value) return; // a bot filled the hidden field
 
     if (SHEET_URL.startsWith("PASTE")) {
       note.className = "form-note error";
@@ -316,7 +316,7 @@
       await fetch(SHEET_URL, {
         method: "POST",
         mode: "no-cors",
-        body: new URLSearchParams({ name, email, message: form.message.value.trim() })
+        body: new URLSearchParams({ name, email, message: document.getElementById("message").value.trim() })
       });
       form.reset();
       note.textContent = "Thank you. We'll be in touch soon.";
