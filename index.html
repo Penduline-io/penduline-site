@@ -331,9 +331,7 @@
       <input id="email" name="email" type="email" placeholder="Email" autocomplete="email" required>
       <label class="sr" for="message">Message</label>
       <textarea id="message" name="message" placeholder="Your institution, role, or TEE workflow (optional)"></textarea>
-      <!-- Hidden trap for spam bots. People never see or fill this. -->
-      <input class="sr" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <button type="submit">START A CONVERSATION</button>
+      <button type="submit">SHARE YOUR CONTACT INFO</button>
       <p class="form-note" id="form-note" role="status"></p>
     </form>
   </section>
@@ -379,8 +377,6 @@
       note.textContent = "Add your name and a valid email address to continue.";
       return;
     }
-    if (form.elements.website.value) return; // a bot filled the hidden field
-
     if (SHEET_URL.startsWith("PASTE")) {
       note.className = "form-note error";
       note.textContent = "This form isn't connected yet.";
@@ -402,7 +398,7 @@
       note.textContent = "That didn't go through. Please try again, or email emily@penduline.io.";
     }
     button.disabled = false;
-    button.textContent = "START A CONVERSATION";
+    button.textContent = "SHARE YOUR CONTACT INFO";
   });
 </script>
 
